@@ -10,5 +10,6 @@ add_library(keyboardtranslator
 target_link_libraries(
     keyboardtranslator
     ${konsole_LIBS}
+    konsoleprivate_core
 )
 
