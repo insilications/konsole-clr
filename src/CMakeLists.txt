@@ -227,8 +227,18 @@ ki18n_wrap_ui(konsoleprivate_SRCS
 # add the resource files for the ui files
 qt5_add_resources( konsoleprivate_SRCS ../desktop/konsole.qrc)
 
-add_library(konsoleprivate ${konsoleprivate_SRCS})
+add_library(konsoleprivate STATIC ${konsoleprivate_SRCS})
 generate_export_header(konsoleprivate BASE_NAME konsoleprivate)
+
+#set_property(TARGET konsoleprivate_core PROPERTY VISIBILITY_INLINES_HIDDEN OFF)
+#set_property(TARGET konsolecolorscheme PROPERTY VISIBILITY_INLINES_HIDDEN OFF)
+#set_property(TARGET keyboardtranslator PROPERTY VISIBILITY_INLINES_HIDDEN OFF)
+#set_property(TARGET konsolehelpers PROPERTY VISIBILITY_INLINES_HIDDEN OFF)
+#set_property(TARGET konsolesession PROPERTY VISIBILITY_INLINES_HIDDEN OFF)
+#set_property(TARGET konsoleprofile PROPERTY VISIBILITY_INLINES_HIDDEN OFF)
+#set_property(TARGET konsolecharacters PROPERTY VISIBILITY_INLINES_HIDDEN OFF)
+#set_property(TARGET konsoledecoders PROPERTY VISIBILITY_INLINES_HIDDEN OFF)
+#set_property(TARGET konsoleprivate PROPERTY VISIBILITY_INLINES_HIDDEN OFF)
 
 find_package(ZLIB)
 
@@ -246,14 +256,14 @@ target_link_libraries(konsoleprivate
     ZLIB::ZLIB
 )
 
-set_target_properties(konsoleprivate PROPERTIES
-    VERSION ${KONSOLEPRIVATE_VERSION}
-    SOVERSION ${KONSOLEPRIVATE_SOVERSION}
-)
+#set_target_properties(konsoleprivate PROPERTIES
+    #VERSION ${KONSOLEPRIVATE_VERSION}
+    #SOVERSION ${KONSOLEPRIVATE_SOVERSION}
+#)
 
-install(TARGETS konsoleprivate ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
+#install(TARGETS konsoleprivate ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
 
-add_library(konsoleapp SHARED Application.cpp
+add_library(konsoleapp STATIC Application.cpp
    MainWindow.cpp
    settings/ConfigurationDialog.cpp
    settings/ConfigDialogButtonGroupManager.cpp
@@ -278,12 +288,12 @@ target_link_libraries(konsoleapp
   KF5::Crash
 )
 
-set_target_properties(konsoleapp PROPERTIES
-    VERSION ${KONSOLEPRIVATE_VERSION}
-    SOVERSION ${KONSOLEPRIVATE_SOVERSION}
-)
+#set_target_properties(konsoleapp PROPERTIES
+    #VERSION ${KONSOLEPRIVATE_VERSION}
+    #SOVERSION ${KONSOLEPRIVATE_SOVERSION}
+#)
 
-install(TARGETS konsoleapp ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
+#install(TARGETS konsoleapp ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
 
 set(konsole_SRCS
    main.cpp
